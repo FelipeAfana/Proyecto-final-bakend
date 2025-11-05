@@ -1,4 +1,3 @@
-
 <header class="header">
     <img src="{{ asset('imagenes/logo.png') }}" alt="Tsunami Splash" class="logo-img">
     <nav class="nav">

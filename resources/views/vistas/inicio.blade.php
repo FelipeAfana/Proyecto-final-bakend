@@ -5,9 +5,6 @@
 <link rel="stylesheet" href="{{ asset('css/style_ini.css') }}">
 
 
-    <style>
-       
-    </style>
 
 
     <!-- Hero Section -->

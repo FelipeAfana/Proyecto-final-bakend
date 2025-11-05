@@ -6,7 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Salitre magico</title>
     <link rel="icon" href="{{ asset('imagenes/logo_salitre.png') }}" type="image/png">
-    <link rel="stylesheet" href="{{ asset('css/style.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/style.css')}}">
 
 
 </head>
