@@ -21,7 +21,7 @@
             <div class="attraction-card">
                 <span class="badge extrema">Extrema</span>
                 <div class="attraction-img-container">
-                    <img src="{{asset('imagenes/montaña_rusa.jpg')}}" alt="Formula Rosca" class="attraction-img">
+                    <img src="{{asset('imagenes/montaña_rusa1.jpg')}}" alt="Formula Rosca" class="attraction-img">
                 </div>
                 <div class="attraction-content">
                     <h3 class="attraction-title">Formula Rosca</h3>

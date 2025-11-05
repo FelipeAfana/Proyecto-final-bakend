@@ -5,20 +5,17 @@
 @section('content')
 
 
-  <div class="container">
-        <div class="breadcrumb">
-            <a href="#">Inicio</a> / <a href="#">Atracciones</a> / Formula Rosca
-        </div>
-
+    <!-- Main Content -->
+    <div class="container">
         <div class="detail-grid">
             <!-- Gallery Section -->
             <div class="gallery-section">
-                <img src="https://images.unsplash.com/photo-1509042239860-f550ce710b93?w=800" alt="Formula Rosca" class="main-image" id="mainImage">
+                <img src="{{asset('imagenes/montaña_rusa.jpg')}}" alt="Formula Rosca" class="main-image" id="mainImage">
                 <div class="thumbnail-gallery">
-                    <img src="https://images.unsplash.com/photo-1509042239860-f550ce710b93?w=200" alt="Vista 1" class="thumbnail">
-                    <img src="https://images.unsplash.com/photo-1594818379496-da1e345b0ded?w=200" alt="Vista 2" class="thumbnail">
-                    <img src="https://images.unsplash.com/photo-1544124493-1776c40ce002?w=200" alt="Vista 3" class="thumbnail">
-                    <img src="https://images.unsplash.com/photo-1594995508764-c7e80d3bcf3f?w=200" alt="Vista 4" class="thumbnail">
+                    <img src="{{asset('imagenes/montaña_rusa1.jpg')}}" alt="Vista 1" class="thumbnail">
+                    <img src="{{asset('imagenes/montaña_rusa2.jpg')}}" alt="Vista 2" class="thumbnail">
+                    <img src="{{asset('imagenes/montaña_rusa3.jpg')}}" alt="Vista 3" class="thumbnail">
+                    <img src="{{asset('imagenes/montaña_rusa4.jpg')}}" alt="Vista 4" class="thumbnail">
                 </div>
             </div>
 
@@ -74,7 +71,7 @@
                     <div class="calendar-header">
                         <h2>Selecciona tu Fecha
                             <br>
-                            Momentania mientras se desarrolla la funcion
+                            funcion temporal, remplazar cuando se pueda
                         </h2>
                         <div class="month-selector">
                             <button class="month-btn">◀</button>
@@ -159,15 +156,35 @@
                     <div class="reviewer-info">
                         <div class="reviewer-avatar">M</div>
                         <div>
-                            <strong>Desarrollador</strong>
-                            <div class="stars" style="font-size: 1rem;">⭐⭐⭐⭐⭐</div>
+                            <strong>Desarrollador FULLSTACK</strong>
+                            <div class="stars" style="font-size: 1rem;"></div>
                         </div>
                     </div>
                     <span style="color: #888; font-size: 0.9rem;">Hace 2 días</span>
                 </div>
-                <p class="review-text">Puesto para desarrollar los comentarios.</p>
+                <p class="review-text">Espacio para poner los comentarios</p>
             </div>
 
+            
         </div>
-    </div>       
+    </div>
+
+    
+
+    <script>
+        // Thumbnail gallery functionality
+        const thumbnails = document.querySelectorAll('.thumbnail');
+        const mainImage = document.getElementById('mainImage');
+
+        thumbnails.forEach(thumb => {
+            thumb.addEventListener('click', () => {
+                mainImage.src = thumb.src.replace('w=200', 'w=800');
+            });
+        });
+
+        
+
+        
+    </script>
+     
 @endsection

@@ -23,7 +23,7 @@
             <div class="attractions-grid">
                 <div class="attraction-card featured">
                     <span class="badge popular">Popular</span>
-                    <img src="{{asset('imagenes/montaña_rusa.jpg')}}" alt="Formula Rosca" class="attraction-img">
+                    <img src="{{asset('imagenes/montaña_rusa1.jpg')}}" alt="Formula Rosca" class="attraction-img">
                     <div class="attraction-content">
                         <h3 class="attraction-title">Formula Rosca</h3>
                         <div class="attraction-meta">
