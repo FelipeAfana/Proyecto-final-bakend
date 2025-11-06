@@ -10,7 +10,7 @@
         <div class="detail-grid">
             <!-- Gallery Section -->
             <div class="gallery-section">
-                <img src="{{asset('imagenes/montaña_rusa.jpg')}}" alt="Formula Rosca" class="main-image" id="mainImage">
+                <img src="{{asset('imagenes/montaña_rusa1.jpg')}}" alt="Formula Rosca" class="main-image" id="mainImage">
                 <div class="thumbnail-gallery">
                     <img src="{{asset('imagenes/montaña_rusa1.jpg')}}" alt="Vista 1" class="thumbnail">
                     <img src="{{asset('imagenes/montaña_rusa2.jpg')}}" alt="Vista 2" class="thumbnail">

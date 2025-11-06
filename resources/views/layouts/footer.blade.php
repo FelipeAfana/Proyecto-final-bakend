@@ -26,13 +26,13 @@
                 <h3>Síguenos</h3>
                 <div class="social-icons">
                     <a href="https://www.facebook.com/groups/2347318361" target="_blank" class="social-icon">
-                        <img src="imagenes/facebook.png" alt="Facebook">
+                        <img src="{{asset('imagenes/facebook.png')}}" alt="Facebook">
                     </a>
                     <a href="https://www.instagram.com/unab_online" target="_blank" class="social-icon">
-                        <img src="imagenes/instagram.png" alt="Instagram">
+                        <img src="{{(asset('imagenes/instagram.png'))}}" alt="Instagram">
                     </a>
                     <a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ&list=RDdQw4w9WgXcQ&start_radio=1" target="_blank" class="social-icon">
-                        <img src="imagenes/youtube.png" alt="YouTube">
+                        <img src="{{asset('imagenes/youtube.png')}}" alt="YouTube">
                     </a>
                 </div>
             </div>

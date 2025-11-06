@@ -64,44 +64,9 @@
                     </div>
                 </div>
 
-                <div class="attraction-card featured">
-                    <img src="{{asset('imagenes/agua.jpg')}}" alt="Tsunami Splash" class="attraction-img">
-                    <div class="attraction-content">
-                        <h3 class="attraction-title">Tsunami Splash</h3>
-                        <div class="attraction-meta">
-                            <span class="meta-item">💦 Acuática</span>
-                            <span class="meta-item">👨‍👩‍👧 Familiar</span>
-                        </div>
-                        <p class="attraction-description">¡Prepárate para mojarte! Una ola gigante te espera al final.</p>
-                        <button class="btn-secondary">Ver Detalles</button>
-                    </div>
-                </div>
+                
 
-                <div class="attraction-card featured">
-                    <img src="{{asset('imagenes/carro.jpg')}}" alt="Turbo Crash" class="attraction-img">
-                    <div class="attraction-content">
-                        <h3 class="attraction-title">Turbo Crash</h3>
-                        <div class="attraction-meta">
-                            <span class="meta-item">🚗 Choque</span>
-                            <span class="meta-item">👨‍👩‍👧 Para todos</span>
-                        </div>
-                        <p class="attraction-description">Diversión asegurada chocando con tus amigos y familia.</p>
-                        <button class="btn-secondary">Ver Detalles</button>
-                    </div>
-                </div>
-
-                <div class="attraction-card featured">
-                    <img src="{{asset('imagenes/casamiedo.jpeg')}}" alt="El Laberinto" class="attraction-img">
-                    <div class="attraction-content">
-                        <h3 class="attraction-title">El Laberinto del Miedo</h3>
-                        <div class="attraction-meta">
-                            <span class="meta-item">👻 Terror</span>
-                            <span class="meta-item">📏 120 cm</span>
-                        </div>
-                        <p class="attraction-description">¿Te atreves a perderte en nuestro laberinto embrujado?</p>
-                        <button class="btn-secondary">Ver Detalles</button>
-                    </div>
-                </div>
+                
             </div>
         </div>
     </section>
