@@ -16,3 +16,7 @@ Route::get('/inicio', [VistasController::class, 'inicio'])->name('inicio');
 Route::prefix("atracciones")->controller(VistasController::class) ->group(function(){
     Route::get("/montaña", "montaña")->name('montaña');
 });
+
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

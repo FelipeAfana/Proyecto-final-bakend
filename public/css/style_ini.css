@@ -199,17 +199,9 @@
             align-items: center;
         }
 
-        .promo-text h2 {
-            font-size: 2.5rem;
-            color: #7C2FE6;
-            margin-bottom: 1rem;
-        }
+      
 
-        .promo-text p {
-            font-size: 1.2rem;
-            color: #333;
-            margin-bottom: 2rem;
-        }
+        
 
         .promo-img {
             width: 100%;
