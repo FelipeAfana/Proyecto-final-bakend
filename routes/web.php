@@ -1,21 +1,23 @@
 <?php
 
-use App\Http\Controllers\VistasController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\VistasController;
+use App\Http\Controllers\ReservaController;
+use Illuminate\Support\Facades\Auth;
 
-Route::get('/', function () {
-    return view('vistas.inicio');
-});
 
+
+Route::get('/', [VistasController::class, 'inicio'])->name('inicio');
 Route::get('/promo', [VistasController::class, 'promo'])->name('promo');
-
 Route::get('/atracciones', [VistasController::class, 'atrac'])->name('atracciones');
 
-Route::get('/inicio', [VistasController::class, 'inicio'])->name('inicio');
-
-Route::prefix("atracciones")->controller(VistasController::class) ->group(function(){
-    Route::get("/montaña", "montaña")->name('montaña');
+Route::prefix("atracciones")->controller(VistasController::class)->group(function(){
+    Route::get("montaña", "montaña")->name('montaña');
 });
+
+Route::post('/reservas', [ReservaController::class, 'store'])
+    ->name('reservas.store')
+    ->middleware('auth');
 
 Auth::routes();
 
