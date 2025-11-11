@@ -13,6 +13,9 @@ Route::get('/atracciones', [VistasController::class, 'atrac'])->name('atraccione
 
 Route::prefix("atracciones")->controller(VistasController::class)->group(function(){
     Route::get("montaña", "montaña")->name('montaña');
+    Route::get("rueda", "rueda")->name('rueda');
+    Route::get("barco", "barco")->name('barco');
+    Route::get("carro", "carro")->name('carro');
 });
 
 Route::post('/reservas', [ReservaController::class, 'store'])

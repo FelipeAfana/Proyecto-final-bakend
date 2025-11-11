@@ -54,9 +54,9 @@
                     <div class="attraction-meta">
                         <span class="meta-item">⚡ Alta intensidad</span>
                         <span class="meta-item">📏 140 cm mín.</span>
-                        <span class="meta-item">⏱️ 2:30 min</span>
+                        <span class="meta-item">⏱️ 5 min</span>
                     </div>
-                    <button class="btn-details">Ver Más</button>
+                    <a class="btn-details" href="{{ route('barco')}}">Ver Más</a>
                 </div>
             </div>
 
@@ -80,9 +80,9 @@
                     <div class="attraction-meta">
                         <span class="meta-item">🎡 Relajante</span>
                         <span class="meta-item">👨‍👩‍👧 Para todos</span>
-                        <span class="meta-item">⏱️ 8 min</span>
+                        <span class="meta-item">⏱️ 7 min</span>
                     </div>
-                    <button class="btn-details">Ver Más</button>
+                    <a class="btn-details" href="{{ route('rueda')}}">Ver Más</a>
                 </div>
             </div>
 
@@ -103,7 +103,7 @@
                         <span class="meta-item">📏 110 cm mín.</span>
                         <span class="meta-item">⏱️ 5 min</span>
                     </div>
-                    <button class="btn-details">Ver Más</button>
+                    <a class="btn-details" href="{{ route('carro')}}">Ver Más</a>
                 </div>
             </div>
 
