@@ -1,9 +1,11 @@
 @extends('layouts.app')
 
+{{-- Asegúrate de que este archivo CSS exista en public/css/style_atra.css --}}
 <link rel="stylesheet" href="{{ asset('css/style_atra.css') }}">
 
 @section('content')
 
+    {{-- Notificación Toast de Éxito para Reservas --}}
     <div id="toast-success" style="
         position: fixed;
         top: 20px;
@@ -20,12 +22,14 @@
         Reserva exitosa 🎉
     </div>
 
+    {{-- Manejo de Errores Generales (sesión) --}}
     @if (session('error'))
         <div class="alert alert-danger" style="background-color: #f8d7da; color: #721c24; padding: 15px; border-radius: 5px; margin-bottom: 20px;">
             {{ session('error') }}
         </div>
     @endif
 
+    {{-- Manejo de Errores de Validación (formulario) --}}
     @if ($errors->any())
         <div class="alert alert-danger" style="background-color: #f8d7da; color: #721c24; padding: 15px; border-radius: 5px; margin-bottom: 20px;">
             <strong style="display: block; margin-bottom: 5px;">Error al procesar la reserva. Verifique los campos:</strong>
@@ -78,7 +82,8 @@
                 <form method="POST" action="{{ route('reservas.store') }}">
                     @csrf
 
-                    <input type="hidden" name="atraccion_id" value="1">
+                    {{-- Usamos $atraccion->id para obtener el ID de forma dinámica, aunque aquí es estático (1) --}}
+                    <input type="hidden" name="atraccion_id" value="{{ $atraccion->id ?? 1 }}">
 
                     <div class="calendar-section" style="border: 1px solid #eee; padding: 20px; border-radius: 8px; margin-top: 20px;">
 
@@ -156,8 +161,10 @@
 
         <hr style="margin: 40px 0;">
 
+        {{-- INICIO: SECCIÓN DE COMENTARIOS (CORREGIDA) --}}
         <div class="reviews-section">
-            <h2>Reseñas de Visitantes ({{ $atraccion->comentarios->count() }})</h2>
+            {{-- Usamos el operador null-safe (?->) para contar comentarios de forma segura --}}
+            <h2>Reseñas de Visitantes ({{ $atraccion?->comentarios->count() ?? 0 }})</h2>
 
             @auth
             <div style="margin-bottom: 30px; padding: 20px; border: 1px solid #ddd; border-radius: 8px;">
@@ -165,7 +172,8 @@
                 <form method="POST" action="{{ route('comentarios.store') }}">
                     @csrf
 
-                    <input type="hidden" name="atraccion_id" value="{{ $atraccion->id }}">
+                    {{-- Usamos el operador null-safe (?->) para el ID --}}
+                    <input type="hidden" name="atraccion_id" value="{{ $atraccion->id ?? 1 }}">
 
                     <textarea
                         name="contenido"
@@ -190,9 +198,11 @@
             </div>
             @endauth
 
-            @forelse ($atraccion->comentarios->sortByDesc('created_at') as $comentario)
+            {{-- CORRECCIÓN APLICADA AQUÍ: Usa @forelse y ?? [] para garantizar que sea iterable --}}
+            @forelse ($atraccion?->comentarios->sortByDesc('created_at') ?? [] as $comentario)
             <div style="border-bottom: 1px solid #eee; padding: 15px 0;">
-                <p style="font-weight: bold; margin: 0; display: inline-block;">{{ $comentario->user->name }}</p>
+                {{-- Usamos null-safe en el nombre del usuario por si acaso --}}
+                <p style="font-weight: bold; margin: 0; display: inline-block;">{{ $comentario->user->name ?? 'Usuario Eliminado' }}</p>
                 <span style="font-size: 0.85rem; color: #999; margin-left: 10px;">{{ $comentario->created_at->diffForHumans() }}</span>
                 <p style="margin-top: 5px; margin-bottom: 0;">{{ $comentario->contenido }}</p>
             </div>
@@ -201,6 +211,7 @@
             @endforelse
 
         </div>
+        {{-- FIN: SECCIÓN DE COMENTARIOS (CORREGIDA) --}}
     </div>
 
     <script>
