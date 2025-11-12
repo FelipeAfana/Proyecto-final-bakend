@@ -16,7 +16,7 @@ class Atraccion extends Model
     protected $table = 'atracciones';
     protected $primaryKey = 'id';
 
-    // Campos que permiten asignación masiva
+    // asignación masiva
     protected $fillable = [
         'Nombre',
         'Descripcion',
@@ -34,5 +34,10 @@ class Atraccion extends Model
     public function reservas()
     {
         return $this->hasMany(Reserva::class);
+    }
+
+    public function comentarios()
+    {
+        return $this->hasMany(Comentario::class);
     }
 }

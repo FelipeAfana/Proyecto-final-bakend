@@ -12,50 +12,50 @@ class ReservaController extends Controller
 {
     public function store(Request $request)
     {
-        // Validar los datos del formulario
+        // Validacion de los datos del formulario
         $request->validate([
             'Fecha' => 'required|date|after_or_equal:today',
+            'Hora' => 'required|date_format:H:i|after_or_equal:09:00|before_or_equal:18:00',
             'Cantidad' => 'required|integer|min:1',
             'entrada_tipo' => 'required|string|in:general,fast_pass',
-
+            'atraccion_id' => 'required|integer',
         ]);
 
         $userID = Auth::id();
+        $atraccionID = $request->atraccion_id;
 
-        $atraccionID = 1;
+
+        $dateTimeReserva = Carbon::parse($request->Fecha . ' ' . $request->Hora);
+
 
         $entradaTipo = $request->entrada_tipo;
         $precioBuscado = ($entradaTipo == 'general') ? 45000 : 75000;
 
 
         $entradaObjeto = Entrada::where('Precio', $precioBuscado)
-                                ->where('atraccion_id', $atraccionID) // Usa el ID 1 para buscar la entrada
+                                ->where('atraccion_id', $atraccionID)
                                 ->first();
 
         if (!$entradaObjeto) {
-
             return redirect()->back()->with('error', 'Error: La configuración de tickets está incompleta. Verifique la tabla Entradas.');
         }
 
         $entradaID = $entradaObjeto->id;
 
-        // Crear la Reserva
+        // aqui se Crea la Reserva
         try {
             Reserva::create([
                 'Fecha' => $request->Fecha,
-                'Hora_entrada' => Carbon::parse($request->Fecha)->startOfDay(),
+                'Hora_entrada' => $dateTimeReserva,
                 'Cantidad' => $request->Cantidad,
                 'Estado' => 'Pendiente',
                 'user_id' => $userID,
                 'entrada_id' => $entradaID,
-
             ]);
-
 
             return redirect()->route('montaña')->with('success', true);
 
         } catch (\Exception $e) {
-
             return redirect()->back()->with('error', 'Error fatal al guardar. Revisa las llaves foráneas o el estado de la DB.');
         }
     }
