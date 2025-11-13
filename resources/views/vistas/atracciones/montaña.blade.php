@@ -1,9 +1,11 @@
 @extends('layouts.app')
 
+{{-- Asegúrate de que este archivo CSS exista en public/css/style_atra.css --}}
 <link rel="stylesheet" href="{{ asset('css/style_atra.css') }}">
 
 @section('content')
 
+    {{-- Notificación Toast de Éxito para Reservas --}}
     <div id="toast-success" style="
         position: fixed;
         top: 20px;
@@ -20,12 +22,14 @@
         Reserva exitosa 🎉
     </div>
 
+    {{-- Manejo de Errores Generales (sesión) --}}
     @if (session('error'))
         <div class="alert alert-danger" style="background-color: #f8d7da; color: #721c24; padding: 15px; border-radius: 5px; margin-bottom: 20px;">
             {{ session('error') }}
         </div>
     @endif
 
+    {{-- Manejo de Errores de Validación (formulario) --}}
     @if ($errors->any())
         <div class="alert alert-danger" style="background-color: #f8d7da; color: #721c24; padding: 15px; border-radius: 5px; margin-bottom: 20px;">
             <strong style="display: block; margin-bottom: 5px;">Error al procesar la reserva. Verifique los campos:</strong>
@@ -63,6 +67,7 @@
                 <div class="description">
                     Sumérgete en la adrenalina pura de la Formula Rosca. Una experiencia de alta velocidad con caídas vertiginosas y giros de 360 grados que pondrán a prueba tus límites. ¡Siente la fuerza G!
                 </div>
+
                 <div class="requirements">
                     <h2>Requisitos y Especificaciones</h2>
                     <div class="requirement-grid">
@@ -72,10 +77,13 @@
                         <div class="requirement-item"><div class="requirement-icon">🎢</div><div class="requirement-text"><h3>Velocidad Máxima</h3><p>120 km/h</p></div></div>
                     </div>
                 </div>
+
+
                 <form method="POST" action="{{ route('reservas.store') }}">
                     @csrf
 
-                    <input type="hidden" name="atraccion_id" value="1">
+                    {{-- Usamos $atraccion->id para obtener el ID de forma dinámica, aunque aquí es estático (1) --}}
+                    <input type="hidden" name="atraccion_id" value="{{ $atraccion->id ?? 1 }}">
 
                     <div class="calendar-section" style="border: 1px solid #eee; padding: 20px; border-radius: 8px; margin-top: 20px;">
 
@@ -90,6 +98,21 @@
                                 style="width: 100%; padding: 12px; border: 1px solid #ccc; border-radius: 5px; font-size: 1rem;"
                                 min="{{ \Carbon\Carbon::now()->format('Y-m-d') }}"
                             >
+                        </div>
+
+                        <div style="margin-bottom: 25px;">
+                            <label for="hora_reserva" style="font-weight: bold; display: block; margin-bottom: 10px; font-size: 1.1rem;">⏱️ Selecciona la Hora:</label>
+                            <input
+                                type="time"
+                                id="hora_reserva"
+                                name="Hora"
+                                required
+                                value="{{ old('Hora') }}"
+                                style="width: 100%; padding: 12px; border: 1px solid #ccc; border-radius: 5px; font-size: 1rem;"
+                                min="09:00"
+                                max="18:00"
+                            >
+                            <p style="font-size: 0.85rem; color: #666; margin-top: 5px;">Horario de atención: 9:00 AM a 6:00 PM</p>
                         </div>
 
                         <div style="margin-bottom: 25px;">
@@ -136,23 +159,75 @@
                 </div>
         </div>
 
-        <div class="reviews-section"><h2>Reseñas de Visitantes</h2></div>
+        <hr style="margin: 40px 0;">
+
+        {{-- INICIO: SECCIÓN DE COMENTARIOS (CORREGIDA) --}}
+        <div class="reviews-section">
+            {{-- Usamos el operador null-safe (?->) para contar comentarios de forma segura --}}
+            <h2>Reseñas de Visitantes ({{ $atraccion?->comentarios->count() ?? 0 }})</h2>
+
+            @auth
+            <div style="margin-bottom: 30px; padding: 20px; border: 1px solid #ddd; border-radius: 8px;">
+                <h3 style="margin-top: 0; font-size: 1.2rem;">Deja tu comentario</h3>
+                <form method="POST" action="{{ route('comentarios.store') }}">
+                    @csrf
+
+                    {{-- Usamos el operador null-safe (?->) para el ID --}}
+                    <input type="hidden" name="atraccion_id" value="{{ $atraccion->id ?? 1 }}">
+
+                    <textarea
+                        name="contenido"
+                        rows="4"
+                        placeholder="Escribe aquí tu opinión sobre la atracción..."
+                        required
+                        style="width: 100%; padding: 10px; border-radius: 5px; border: 1px solid #ccc; margin-bottom: 10px;"
+                    ></textarea>
+
+                    <button type="submit" style="background-color: #7C2FE6; color: white; padding: 10px 15px; border: none; border-radius: 5px; cursor: pointer;">
+                        Publicar Comentario
+                    </button>
+
+                    @if (session('success_comment'))
+                        <p style="color: green; margin-top: 10px;">{{ session('success_comment') }}</p>
+                    @endif
+                </form>
+            </div>
+            @else
+            <div style="padding: 15px; background-color: #fff3cd; color: #856404; border: 1px solid #ffeeba; border-radius: 5px; margin-bottom: 20px;">
+                Debes <a href="{{ route('login') }}" style="color: #007bff; text-decoration: underline;">iniciar sesión</a> para dejar una reseña o comentario.
+            </div>
+            @endauth
+
+            {{-- CORRECCIÓN APLICADA AQUÍ: Usa @forelse y ?? [] para garantizar que sea iterable --}}
+            @forelse ($atraccion?->comentarios->sortByDesc('created_at') ?? [] as $comentario)
+            <div style="border-bottom: 1px solid #eee; padding: 15px 0;">
+                {{-- Usamos null-safe en el nombre del usuario por si acaso --}}
+                <p style="font-weight: bold; margin: 0; display: inline-block;">{{ $comentario->user->name ?? 'Usuario Eliminado' }}</p>
+                <span style="font-size: 0.85rem; color: #999; margin-left: 10px;">{{ $comentario->created_at->diffForHumans() }}</span>
+                <p style="margin-top: 5px; margin-bottom: 0;">{{ $comentario->contenido }}</p>
+            </div>
+            @empty
+            <p>Sé el primero en comentar esta atracción.</p>
+            @endforelse
+
+        </div>
+        {{-- FIN: SECCIÓN DE COMENTARIOS (CORREGIDA) --}}
     </div>
 
     <script>
-
+        // Muestra la ventana flotante si la reserva fue exitosa
         @if (session('success'))
             function showToast() {
                 const toast = document.getElementById('toast-success');
                 toast.style.display = 'block';
                 setTimeout(() => {
                     toast.style.display = 'none';
-                }, 3000);
+                }, 3000); // Se oculta después de 3 segundos
             }
             showToast();
         @endif
 
-
+        // Thumbnail gallery functionality
         const thumbnails = document.querySelectorAll('.thumbnail');
         const mainImage = document.getElementById('mainImage');
 

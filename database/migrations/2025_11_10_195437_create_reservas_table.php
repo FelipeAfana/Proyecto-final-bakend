@@ -18,11 +18,11 @@ return new class extends Migration
             $table->integer('Cantidad');
             $table->string('Estado', 255);
 
-            // Llaves foráneas
+
             $table->foreignId('user_id')->constrained('users')->onDelete('cascade');
             $table->foreignId('entrada_id')->constrained('entradas')->onDelete('cascade');
 
-            // ELIMINADA la llave foránea 'atraccion_id' de esta tabla
+
 
             $table->timestamps();
         });

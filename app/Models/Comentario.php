@@ -5,42 +5,25 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-
-use App\Models\Atraccion;
-use App\Models\Entrada;
-use App\Models\User;
-
-class Reserva extends Model
+class Comentario extends Model
 {
     use HasFactory;
 
-    protected $table = 'reservas';
-
     protected $fillable = [
-        'Fecha',
-        'Hora_entrada',
-        'Cantidad',
-        'Estado',
+        'contenido',
         'user_id',
-        'entrada_id',
-        'Total_reserva',
-
+        'atraccion_id',
     ];
 
-
+    // Relación: Un comentario pertenece a un usuario
     public function user()
     {
         return $this->belongsTo(User::class);
     }
 
-
+    // Relación: Un comentario pertenece a una atracción
     public function atraccion()
     {
         return $this->belongsTo(Atraccion::class);
-    }
-
-    public function entrada()
-    {
-        return $this->belongsTo(Entrada::class, 'entrada_id');
     }
 }

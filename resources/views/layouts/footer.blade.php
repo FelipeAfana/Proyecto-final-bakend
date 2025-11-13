@@ -1,10 +1,10 @@
  <style>
- 
+
     </style>
 
     <footer class="footer">
         <div class="footer-content">
-            
+
             <div class="footer-section">
                 <h3>Contacto</h3>
                 <p>📞 +57 3058556247</p>
@@ -12,16 +12,16 @@
                 <p>✉️ Salitrecontacto@salitre.com</p>
             </div>
 
-            <!-- Sección de enlaces -->
+
             <div class="footer-section">
                 <h3>Enlaces Rápidos</h3>
                 <a href="{{ route('inicio') }}">Inicio</a>
                 <a href="{{ route('atracciones') }}">Atracciones</a>
                 <a href="{{ route('promo') }}">Planes</a>
-                
+
             </div>
 
-            <!-- Sección de redes sociales -->
+
             <div class="footer-section">
                 <h3>Síguenos</h3>
                 <div class="social-icons">
