@@ -5,15 +5,16 @@
 <header class="header">
     <div class="header-container">
         <img src="{{ asset('imagenes/logo.png') }}" alt="Logo Salitre" class="logo-img">
-        
+
         <nav class="nav-main">
             <a href="{{ route('inicio') }}" class="nav-link">INICIO</a>
             <a href="{{ route('atracciones') }}" class="nav-link">ATRACCIONES</a>
             <a href="{{ route('promo') }}" class="nav-link">PLANES</a>
+            <a href="{{ route('misreservas') }}" class="nav-link">MIS RESERVAS</a>
         </nav>
 
         <div class="header-actions">
-            
+
             <button class="icon-btn">
                 <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                     <circle cx="9" cy="21" r="1"></circle>

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Reserva;
 use App\Models\Entrada;
+use App\Models\Atraccion;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
 
@@ -24,17 +25,18 @@ class ReservaController extends Controller
         $userID = Auth::id();
         $atraccionID = $request->atraccion_id;
 
-
+        // Combina fecha y hora para el campo Hora_entrada
         $dateTimeReserva = Carbon::parse($request->Fecha . ' ' . $request->Hora);
 
-
+        // Lógica para determinar el ID de la entrada basada en el tipo y precio
         $entradaTipo = $request->entrada_tipo;
+        // Precios hardcodeados (deberían venir de la DB, pero se mantienen según tu código)
         $precioBuscado = ($entradaTipo == 'general') ? 45000 : 75000;
 
-
+        // Busca el objeto Entrada que coincide con el precio y la atracción
         $entradaObjeto = Entrada::where('Precio', $precioBuscado)
-                                ->where('atraccion_id', $atraccionID)
-                                ->first();
+                               ->where('atraccion_id', $atraccionID)
+                               ->first();
 
         if (!$entradaObjeto) {
             return redirect()->back()->with('error', 'Error: La configuración de tickets está incompleta. Verifique la tabla Entradas.');
@@ -56,7 +58,27 @@ class ReservaController extends Controller
             return redirect()->route('montaña')->with('success', true);
 
         } catch (\Exception $e) {
+
             return redirect()->back()->with('error', 'Error fatal al guardar. Revisa las llaves foráneas o el estado de la DB.');
         }
+    }
+
+    /**
+     *
+     *
+     * @return \Illuminate\View\View
+     */
+    public function showMisReservas()
+    {
+        if (!Auth::check()) {
+            return redirect()->route('login');
+        }
+
+        $reservas = Reserva::where('user_id', Auth::id())
+                           ->with(['atraccion', 'entrada'])
+                           ->orderBy('Fecha', 'desc')
+                           ->get();
+
+        return view('vistas.misreservas', compact('reservas'));
     }
 }

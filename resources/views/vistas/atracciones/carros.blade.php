@@ -1,9 +1,7 @@
 @extends('layouts.app')
 
-{{-- Asegúrate de que este archivo CSS exista en public/css/style_atra.css --}}
 <link rel="stylesheet" href="{{ asset('css/style_atra.css') }}">
 <style>
-    /* Estilos temporales para la galería de imágenes del carro, si no están en style_atra.css */
     .gallery-section img { transition: transform 0.2s; }
     .gallery-section img:hover { transform: scale(1.05); }
     .thumbnail-gallery { margin-top: 15px; display: flex; gap: 10px; justify-content: center; }
@@ -13,11 +11,7 @@
 
 @section('content')
 
-    {{--
-    |---------------------------------------------------------------
-    | 1. ALERTAS Y NOTIFICACIONES
-    |---------------------------------------------------------------
-    --}}
+
 
     {{-- Notificación Toast de Éxito para Reservas --}}
     <div id="toast-success" style="
@@ -79,11 +73,6 @@
     @endif
 
 
-    {{--
-    |---------------------------------------------------------------
-    | 2. DETALLE DE LA ATRACCIÓN Y FORMULARIO DE RESERVA
-    |---------------------------------------------------------------
-    --}}
     <div class="container">
         <div class="detail-grid">
             <div class="gallery-section">
@@ -100,7 +89,6 @@
             <div class="info-section">
 
                 <div class="attraction-title-section">
-                    {{-- TÍTULO: Turbo Crash (Carros) --}}
                     <h1>{{ $atraccion?->nombre ?? 'Turbo Crash' }}</h1>
                     <div class="rating-section">
                         <span class="stars">⭐⭐⭐⭐</span>
@@ -109,7 +97,6 @@
                 </div>
 
                 <div class="description">
-                    {{-- DESCRIPCIÓN: Turbo Crash (Carros) --}}
                     {{ $atraccion?->descripcion ?? 'Entra en la pista y siente la emoción de conducir tu propio auto. Acelera, gira y choca suavemente con otros conductores en una batalla llena de risas y reflejos. Cada choque libera una nueva dosis de diversión. Perfecta para competir con amigos o en familia. ¡Demuestra tu habilidad al volante y disfruta del caos controlado!' }}
                 </div>
 
@@ -210,11 +197,7 @@
 
         <hr style="margin: 40px 0;">
 
-        {{--
-        |---------------------------------------------------------------
-        | 3. SECCIÓN DE COMENTARIOS
-        |---------------------------------------------------------------
-        --}}
+
         <div class="reviews-section">
             {{-- Usamos el operador null-safe (?->) y el null-coalesce (??) para evitar errores si $atraccion es null --}}
             <h2>Reseñas de Visitantes ({{ $atraccion?->comentarios->count() ?? 0 }})</h2>
@@ -267,11 +250,7 @@
         </div>
     </div>
 
-    {{--
-    |---------------------------------------------------------------
-    | 4. SCRIPTS
-    |---------------------------------------------------------------
-    --}}
+
     <script>
         // Muestra la ventana flotante si la reserva fue exitosa
         @if (session('success'))

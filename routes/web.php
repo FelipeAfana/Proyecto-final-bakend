@@ -31,3 +31,5 @@ Route::post('/comentarios', [ComentarioController::class, 'store'])
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+Route::get('/misreservas', [ReservaController::class, 'showMisReservas'])->name('misreservas');

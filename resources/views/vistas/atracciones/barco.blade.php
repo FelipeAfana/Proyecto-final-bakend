@@ -1,9 +1,7 @@
 @extends('layouts.app')
 
-{{-- Asegúrate de que este archivo CSS exista en public/css/style_atra.css --}}
 <link rel="stylesheet" href="{{ asset('css/style_atra.css') }}">
 <style>
-    /* Estilos temporales para la galería de imágenes del barco, si no están en style_atra.css */
     .gallery-section img { transition: transform 0.2s; }
     .gallery-section img:hover { transform: scale(1.05); }
     .thumbnail-gallery { margin-top: 15px; display: flex; gap: 10px; justify-content: center; }
@@ -89,11 +87,11 @@
                 </div>
 
 
-                {{-- FORMULARIO DE RESERVA --}}
+
                 <form method="POST" action="{{ route('reservas.store') }}">
                     @csrf
 
-                    {{-- ID de la atracción del Barco (asumido como 2) --}}
+
                     <input type="hidden" name="atraccion_id" value="{{ $atraccion?->id ?? 2 }}">
 
                     <div class="calendar-section" style="border: 1px solid #eee; padding: 20px; border-radius: 8px; margin-top: 20px;">
@@ -174,7 +172,7 @@
 
         {{-- SECCIÓN DE COMENTARIOS --}}
         <div class="reviews-section">
-            {{-- Usamos el operador null-safe (?->) y el null-coalesce (??) para evitar errores si $atraccion es null --}}
+
             <h2>Reseñas de Visitantes ({{ $atraccion?->comentarios->count() ?? 0 }})</h2>
 
             @auth
@@ -183,7 +181,7 @@
                 <form method="POST" action="{{ route('comentarios.store') }}">
                     @csrf
 
-                    {{-- Usamos el ID de la atracción del Barco (asumido como 2) --}}
+
                     <input type="hidden" name="atraccion_id" value="{{ $atraccion?->id ?? 2 }}">
 
                     <textarea
@@ -231,7 +229,7 @@
                 toast.style.display = 'block';
                 setTimeout(() => {
                     toast.style.display = 'none';
-                }, 3000); // Se oculta después de 3 segundos
+                }, 3000);
             }
             showToast();
         @endif
