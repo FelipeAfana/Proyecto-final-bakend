@@ -31,7 +31,7 @@
                             <span class="meta-item">📏 145 cm</span>
                         </div>
                         <p class="attraction-description">La montaña rusa más extrema del país. Seis inversiones que te dejarán sin aliento.</p>
-                        <button class="btn-secondary">Ver Detalles</button>
+                        <a class="btn-secondary" href="{{ route('montaña')}}">Ver Detalles</a>
                     </div>
                 </div>
 
@@ -45,7 +45,7 @@
                             <span class="meta-item">👨‍👩‍👧 Familiar</span>
                         </div>
                         <p class="attraction-description">Disfruta de vistas panorámicas desde nuestra icónica rueda de la fortuna.</p>
-                        <button class="btn-secondary">Ver Detalles</button>
+                        <a class="btn-secondary" href="{{ route('rueda')}}">Ver Detalles</a>
                     </div>
                 </div>
 
@@ -59,7 +59,7 @@
                             <span class="meta-item">📏 140 cm</span>
                         </div>
                         <p class="attraction-description">Experimenta la emoción de volar con inversiones extremas.</p>
-                        <a class="btn-secondary" href="{{ route('atracciones') }}">Ver Detalles</a>
+                        <a class="btn-secondary" href="{{ route('barco') }}">Ver Detalles</a>
 
                     </div>
                 </div>
